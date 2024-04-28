@@ -17,6 +17,7 @@ df = pd.read_csv("../Data/Pandemic Impact Monitor.csv", encoding='ISO-8859-1')
 
 
 df['Year'] = pd.to_datetime(df['Date']).dt.year
+
 # Third division plot
 fig_3rd_division = px.scatter(df, x="Consumer Confidence", y="Unemployment Rate", animation_frame="Year", animation_group="Services PMI",
                  color="Ticker", hover_name="Country", facet_col="Ticker",
@@ -30,16 +31,19 @@ app.layout = html.Div([
         html.H2("Pandemic Impact Monitor - All In Hackathon"),
         html.A("Pandemic Impact Monitor Report", href='https://abdessamadtouzani-portfolio.netlify.app/assets/pandemic_impact_exploring.html', target='_blank')
     ], style={'marginTop': 10, 'textAlign':'center'}),
+
     # Second division (Costumer Confidence by country over time)
     html.Div([
         html.Label("Select Country"),
         dcc.Dropdown(options = [{'label': country, 'value': country} for country in df['Country'].unique()], value='switzerland', id='country'),
         dcc.Graph(id='lineplot')
     ]),
+
     # Third division Parallel coordinates
     html.Div([
         dcc.Graph(figure=fig_3rd_division)
     ]),
+
     # Fourth division
     html.Div([
 html.Label('Select Year:'),
@@ -57,12 +61,13 @@ html.Label('Select Year:'),
         options=[
             {'label': country, 'value': country} for country in sorted(df['Country'].unique())
         ],
-        value='canada',  # Default value is the United States
+        value='canada',  
         clearable=False
     ),
     dcc.Graph(id='choropleth-map')
     ])
 ])
+
 # Layout End
 
 # Controls for building the interactions
@@ -74,23 +79,21 @@ html.Label('Select Year:'),
 )
 def line_chart(input_country):
     if input_country is None:
-        # If no country is selected, return an empty figure or a default plot
         return {}
     else:
-        # Filter the DataFrame based on the selected country
         selected_country_data = df[df['Country'] == input_country]
         
         # Group the data by year and calculate the average consumer confidence for each year
         avg_consumer_confidence = selected_country_data.groupby('Year')['Consumer Confidence'].mean().reset_index()
         
-        # Create the line plot using Plotly Express
         fig = px.line(avg_consumer_confidence, x='Year', y='Consumer Confidence', 
                       title=f'Average Consumer Confidence Trend for {input_country}')
         
-        # Customize the plot layout if needed
+        # Customize the plot layout 
         fig.update_layout(xaxis_title='Year', yaxis_title='Average Consumer Confidence')
 
         return fig
+
 # Fourth Division
 @app.callback(
     Output('choropleth-map', 'figure'),
@@ -110,7 +113,7 @@ def update_choropleth_map(selected_year, selected_country):
                                     color_continuous_scale='Viridis',
                                     #range_color=[0, max(df['Unemployment Rate'])],
                                     title=f'Unemployment Rate for {selected_country} in {selected_year}',
-                                    labels={'Country': 'Country Name'},  # Language option
+                                    labels={'Country': 'Country Name'}, 
                                     #color_continuous_scale=px.colors.sequential.Inferno,  # Logarithmic scale
                                     color_continuous_midpoint=0.5  # Midpoint of color scale
                                    )
