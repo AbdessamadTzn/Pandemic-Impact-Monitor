@@ -3,6 +3,10 @@ import dash
 from dash import dcc, html, Input, Output, callback
 import plotly.express as px
 import datetime as dt 
+from dash_bootstrap_templates import load_figure_template
+
+# Still working on dark theme
+load_figure_template(["minty", "minty_dark"])
 
 
 dash.register_page(__name__, path='/')
@@ -35,7 +39,8 @@ def line_chart(input_country):
         avg_consumer_confidence = selected_country_data.groupby('Year')['Consumer Confidence'].mean().reset_index()
         
         fig = px.line(avg_consumer_confidence, x='Year', y='Consumer Confidence', 
-                      title=f'Average Consumer Confidence Trend for {input_country}')
+                    template="minty",
+                    title=f'Average Consumer Confidence Trend for {input_country}')
         
         # Customize the plot layout 
         fig.update_layout(xaxis_title='Year', yaxis_title='Average Consumer Confidence')
