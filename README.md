@@ -14,6 +14,8 @@ Pandemic Impact Monitor is live! Access the hosted project [here](https://pandem
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [Licence](#licence)
+- [Acknowledgements](#acknowledgments)
 
 ## Objectives
 - To analyze and visualize economic trajectories of major economies since the onset of the COVID-19 pandemic.
@@ -40,3 +42,13 @@ To run the application locally:
 
 ## Contributing
 Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+## Acknowledgements
+
+- Data source: [Kaggle](https://www.kaggle.com/datasets/keneticenergy/economic-data-life-after-covid/data)
+- ydata profiling library: [ydata profiling](https://docs.profiling.ydata.ai/latest/)
+
