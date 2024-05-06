@@ -2,10 +2,13 @@ import pandas as pd
 import dash 
 from dash import dcc, html, Input, Output, callback
 import plotly.express as px
-import datetime as dt 
+import datetime as dt
+
 
 
 dash.register_page(__name__)
+
+
 try:
     df = pd.read_csv("../Data/Pandemic Impact Monitor.csv", encoding='ISO-8859-1')
 except Exception as e:
