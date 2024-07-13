@@ -5,6 +5,9 @@ import plotly.express as px
 import datetime as dt
 
 
+app = dash.Dash(__name__)
+
+
 
 dash.register_page(__name__)
 
